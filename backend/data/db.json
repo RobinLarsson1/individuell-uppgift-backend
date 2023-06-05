@@ -1,24 +1,39 @@
 {
-	"users": [
-		{
-			"id": "user-1",
-			"username": "testuser",
-			"password": "123"
-		}
-	],
-	"channels": [
-		{
-			"id": "channel-1",
-			"name": "Channel 1",
-			"members": "user-1, user-2"
-		}
-	],
-	"messages": [
-		{
-			"id": "message-1",
-			"author": "user-1",
-			"content": "Hej hopp"
-		}
-	]
-	
+  "users": [
+    {
+      "id": 1,
+      "username": "testuser",
+      "password": "123"
+    },
+    {
+      "username": "newname",
+      "password": "newpassword",
+      "id": 63784
+    }
+  ],
+  "channels": [
+    {
+      "id": 420,
+      "name": "Channel 1",
+      "members": [
+        "user-1, user-2"
+      ]
+    },
+    {
+      "name": "channel test",
+      "password": "pls",
+      "members": [
+        "user-1",
+        "user-2"
+      ],
+      "id": 92860
+    }
+  ],
+  "messages": [
+    {
+      "id": "message-1",
+      "author": "user-1",
+      "content": "Hej hopp"
+    }
+  ]
 }

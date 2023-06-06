@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-///GET LÄGG TILL USER
+///POST LÄGG TILL USER
 router.post('/', async (req, res) => {
     let addUser = req.body
 
@@ -68,6 +68,8 @@ router.delete('/:id', async (req, res) => {
 });
 
 
+
+///PUT USER
 router.put('/:id', async (req, res) => {
     const id = Number(req.params.id)
 

@@ -4,6 +4,7 @@ dotenv.config()
 import express from 'express'
 import usersRouter from './routes/users.js'
 import channelsRouter from './routes/channels.js'
+import messagesRouter from './routes/messages.js'
 import cors from 'cors'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -28,6 +29,8 @@ app.use(express.static(pathToStaticFolder))
 
 app.use('/api/users', usersRouter)
 app.use('/api/channels', channelsRouter)
+app.use('/api/messages', messagesRouter)
+
 // app.use('/api/users', usersRouter)
 // app.use('/api/search', searchRouter)
 

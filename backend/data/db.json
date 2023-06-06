@@ -31,9 +31,24 @@
   ],
   "messages": [
     {
-      "id": "message-1",
+      "id": 18,
       "author": "user-1",
       "content": "Hej hopp"
+    },
+    {
+      "id": 19,
+      "author": "user-1",
+      "content": "agasaga"
+    },
+    {
+      "id": 20,
+      "author": "user-1",
+      "content": "fsafasf"
+    },
+    {
+      "author": "test",
+      "content": "nytt meddelande",
+      "id": 707476
     }
   ]
 }

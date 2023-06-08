@@ -29,6 +29,24 @@
       "id": 92860
     }
   ],
+  "channelMembers": [
+    {
+      "id": "20",
+      "name": "Rum-1",
+      "members": [
+        "U1",
+        "U2",
+        "U3"
+      ],
+      "channel-messeges": [
+        {
+          "author": "mordin",
+          "message": "hehe",
+          "id": 21
+        }
+      ]
+    }
+  ],
   "messages": [
     {
       "id": 18,

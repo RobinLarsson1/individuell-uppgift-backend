@@ -20,31 +20,22 @@
       ]
     },
     {
-      "name": "channel test",
+      "name": "channel 2",
       "password": "pls",
       "members": [
         "user-1",
         "user-2"
       ],
       "id": 92860
-    }
-  ],
-  "channelMembers": [
+    },
     {
-      "id": "20",
-      "name": "Rum-1",
+      "name": "channel 3",
+      "password": "pls",
       "members": [
-        "U1",
-        "U2",
-        "U3"
+        "user-1",
+        "user-2"
       ],
-      "channel-messeges": [
-        {
-          "author": "mordin",
-          "message": "hehe",
-          "id": 21
-        }
-      ]
+      "id": 92861
     }
   ],
   "messages": [

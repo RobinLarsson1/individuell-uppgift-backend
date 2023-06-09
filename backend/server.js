@@ -54,7 +54,7 @@ app.get('/public', (req, res) => {
 	})
 })
 
-app.post('/login', authenticateToken, async (req, res) => {
+app.post('/login', async (req, res) => {
 	if (!req.body || !req.body.username || !req.body.password) {
 		res.sendStatus(400);
 		return;
@@ -72,7 +72,7 @@ app.post('/login', authenticateToken, async (req, res) => {
 		return;
 	}
 
-	const payload = { userId: user.id };
+	const payload = { userId: user.id, username: user.username};
 	const token = jwt.sign(payload, secret);
 
 	res.send({ token });

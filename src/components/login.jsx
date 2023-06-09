@@ -22,17 +22,17 @@ const sessionStorageKey = 'jwt-example'
 // }
 
 
-const handleLogout = async () => {
-	sessionStorage.removeItem(sessionStorageKey)
-	setIsLoggedIn(false)
-}
 
 
 const Login = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
+	
+	const handleLogout = async () => {
+		sessionStorage.removeItem(sessionStorageKey)
+		setIsLoggedIn(false)
+	}
 	const handleLogin = async () => {
 		try {
 			const response = await fetch('http://localhost:3877/login', {

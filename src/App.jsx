@@ -1,13 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
-import Login from './components/login'
+import Login from './components/Login'
+import Users from './components/Users'
+import Channels from './components/Channels'
+import Message from './components/Messages'
+
 
 function App() {
+ 
+  
+
   return (
-   <Login />
+    <div>
+      <Login />
+      <hr />
+        <Channels />
+        <br />
+        {/* <Message /> */}
+        <Users />
+      </div>
   )
 }
 
 export default App
+
+

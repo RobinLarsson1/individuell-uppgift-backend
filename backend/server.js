@@ -11,6 +11,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import jwt from 'jsonwebtoken';
 import { getDb } from './data/database.js'
+import authenticateToken from './data/authenticateToken.js'
 
 
 const { sign } = jwt;
@@ -53,7 +54,7 @@ app.get('/public', (req, res) => {
 	})
 })
 
-app.post('/login', async (req, res) => {
+app.post('/login', authenticateToken, async (req, res) => {
 	if (!req.body || !req.body.username || !req.body.password) {
 		res.sendStatus(400);
 		return;
@@ -80,6 +81,7 @@ app.post('/login', async (req, res) => {
 
 app.get('/secret', (req, res) => {
 	let authHeader = req.headers.Authorization
+	// let jwt = authHeader.replace('Bearer:', '')
 	console.log('Secret 1:', authHeader) 
 
 	res.send('Fail')

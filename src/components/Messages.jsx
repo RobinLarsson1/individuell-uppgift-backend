@@ -1,35 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Messages({ channelMessages, channelName, channelId }) {
   const [messages, setMessages] = useState(channelMessages);
   const [newMessage, setNewMessage] = useState('');
- 
+
+  useEffect(() => {
+    setMessages(channelMessages);
+  }, [channelMessages]);
 
   const handleMessageSubmit = async () => {
-    console.log(channelId);
     if (newMessage.trim() === '') {
-      return; // Om meddelandet är tomt, avbryt
+      return;
     }
 
     const messageData = {
       author: 'user-1',
-      content: newMessage
+      content: newMessage,
     };
 
     try {
-      if (!channelId) {
-        console.log('channelId är undefined');
-        return;
-      }
-
       const response = await fetch(
         `http://localhost:3877/api/channels/${channelId}/channelMessages`,
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(messageData)
+          body: JSON.stringify(messageData),
         }
       );
 
@@ -37,22 +34,18 @@ function Messages({ channelMessages, channelName, channelId }) {
         const data = await response.json();
         const newMessageId = data.id;
 
-        // Uppdatera kanalmeddelandena med det nya meddelandet
         const updatedChannelMessages = [
-          ...channelMessages,
+          ...messages,
           {
             id: newMessageId,
             author: messageData.author,
             content: messageData.content,
-            timestamp: new Date().toISOString()
-          }
+            timestamp: new Date().toISOString(),
+          },
         ];
 
-        // Uppdatera state för nya meddelandet och rensa textfältet
         setMessages(updatedChannelMessages);
         setNewMessage('');
-
-		setChannelMessages(updatedChannelMessages);
       } else {
         console.log('Något gick fel');
       }
@@ -61,16 +54,14 @@ function Messages({ channelMessages, channelName, channelId }) {
     }
   };
 
-  
-
   return (
     <div className="chat-area">
       <section className="heading">
         Chattar i <span className="chat-name">{channelName}</span>
       </section>
       <section className="history">
-        {channelMessages.length > 0 ? (
-          channelMessages.map((message) => (
+        {messages.length > 0 ? (
+          messages.map((message) => (
             <section key={message.id} className={message.author}>
               <p>
                 {message.author}: {message.content}

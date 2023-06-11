@@ -34,6 +34,26 @@
           "id": 3,
           "author": "user-2",
           "content": "Nytt meddelande i kanal 1"
+        },
+        {
+          "author": "user-1",
+          "content": "orka",
+          "id": 30721
+        },
+        {
+          "author": "user-1",
+          "content": "sfa",
+          "id": 5990
+        },
+        {
+          "author": "user-1",
+          "content": "bg",
+          "id": 68852
+        },
+        {
+          "author": "user-1",
+          "content": "gdsg",
+          "id": 68494
         }
       ]
     },

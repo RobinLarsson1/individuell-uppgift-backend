@@ -41,6 +41,24 @@ router.post('/', async (req, res) => {
     res.send({ id: addChannel.id })
 })
 
+// LÄGG TILL MEDDELANDE
+router.post('/:channelId/channelMessages', async (req, res) => {
+    const channelId = parseInt(req.params.channelId);
+    const newMessage = req.body;
+  
+    await db.read();
+    const channelIndex = db.data.channels.findIndex((c) => c.id === channelId);
+    if (channelIndex === -1) {
+      res.status(404).send('Kanalen hittades inte.');
+      return;
+    }
+  
+    newMessage.id = Math.floor(Math.random() * 100000);
+    db.data.channels[channelIndex].channelMessages.push(newMessage);
+    await db.write();
+    
+    res.send({ id: newMessage.id });
+  });
 
 ///DELETE CHANNEL 
 router.delete('/:id', async (req, res) => {

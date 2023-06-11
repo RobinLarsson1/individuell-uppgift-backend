@@ -11,12 +11,16 @@ function Channels() {
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [messages, setMessages] = useState([]); // Ny state-variabel för meddelanden
   const [channelMessages, setChannelMessages] = useState([]);
+  
+
 
   useEffect(() => {
     handleGetChannels()
   }, [])
 
 
+
+  
   const handleGetChannels = async () => {
     try {
       const data = await getChannels();
@@ -49,14 +53,19 @@ function Channels() {
     }
   };
 
-  const handleChannelClick = async (channelId) => {
+  const handleChannelClick = async (channelId, channelName) => {
     setSelectedChannel(channelId);
     try {
       const response = await fetch(`/api/channels/${channelId}`);
       if (response.ok) {
         const data = await response.json();
-        setChannelMessages(data); // Spara meddelandena i channelmessages
-        console.log(data)
+        setChannelMessages(data);
+        if (channelName) {
+          setChannelName(channelName); // Sätt kanalnamnet om det är definierat
+        } else {
+          setChannelName(''); // Återställ kanalnamnet till tom sträng om det är odefinierat
+        }
+        console.log(data);
       } else {
         throw new Error('Failed to fetch channel messages');
       }
@@ -96,9 +105,13 @@ function Channels() {
         <br />
       </div>
       {selectedChannel && (
-      <Messages channelMessages={channelMessages} />
-    )}
-      
+        <Messages
+        channelMessages={channelMessages}
+        channelName={channelName}
+        channelId={selectedChannel} // Uppdatera här
+      />
+      )}
+
     </div>
   );
 }

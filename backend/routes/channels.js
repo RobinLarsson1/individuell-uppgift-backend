@@ -13,23 +13,24 @@ router.get('/', async (req, res) => {
 
 ///GET FRÅN ID
 router.get('/:id', async (req, res) => {
-    let id = Number(req.params.id);
-
+    const id = Number(req.params.id);
+  
     if (!isNaN(id)) {
-        await db.read();
-        const channel = db.data.channels.find((c) => c.id === id);
-        if (channel) {
-            res.send(channel);
-        } else {
-            res.status(404).send('Channel not found.');
-        }
+      await db.read();
+      const channel = db.data.channels.find((c) => c.id === id);
+      if (channel) {
+        const channelMessages = channel.channelMessages || [];
+        res.send(channelMessages);
+      } else {
+        res.status(404).send('Channel not found.');
+      }
     } else {
-        res.status(400).send('Invalid id.');
+      res.status(400).send('Invalid id.');
     }
-});
+  });
+  
 
-
-///GET LÄGG TILL CHANNEL
+///LÄGG TILL CHANNEL
 router.post('/', async (req, res) => {
     let addChannel = req.body
 

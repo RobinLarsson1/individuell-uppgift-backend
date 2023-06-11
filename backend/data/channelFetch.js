@@ -71,6 +71,20 @@ const addChannel = async (channelName, setErrorMessage, getChannels, setChannel)
 };
 
 
+export async function getChannelMessages(channelId) {
+    try {
+      const response = await fetch(`/api/channels/${channelId}`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch channel messages');
+      }
+    } catch (error) {
+      throw new Error('Failed to fetch channel messages');
+    }
+  }
+
 
 
 

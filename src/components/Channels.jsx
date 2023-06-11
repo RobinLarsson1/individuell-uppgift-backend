@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { addChannel, deleteChannel, getChannels } from '../../backend/data/channelFetch'
-import Message from './Messages'
+import Messages from './Messages'
+
 
 
 function Channels() {
@@ -8,6 +9,8 @@ function Channels() {
   const [errorMessage, setErrorMessage] = useState('')
   const [channel, setChannel] = useState([])
   const [selectedChannel, setSelectedChannel] = useState(null);
+  const [messages, setMessages] = useState([]); // Ny state-variabel för meddelanden
+  const [channelMessages, setChannelMessages] = useState([]);
 
   useEffect(() => {
     handleGetChannels()
@@ -46,10 +49,21 @@ function Channels() {
     }
   };
 
-  const handleChannelClick = (channelId) => {
+  const handleChannelClick = async (channelId) => {
     setSelectedChannel(channelId);
+    try {
+      const response = await fetch(`/api/channels/${channelId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setChannelMessages(data); // Spara meddelandena i channelmessages
+        console.log(data)
+      } else {
+        throw new Error('Failed to fetch channel messages');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-
 
   return (
     <div>
@@ -81,7 +95,10 @@ function Channels() {
         </section>
         <br />
       </div>
-      {selectedChannel && <Message channelId={selectedChannel} />}
+      {selectedChannel && (
+      <Messages channelMessages={channelMessages} />
+    )}
+      
     </div>
   );
 }

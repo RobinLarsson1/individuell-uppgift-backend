@@ -16,26 +16,58 @@
       "id": 420,
       "name": "Channel 1",
       "members": [
-        "user-1, user-2"
+        "user-1",
+        "user-2"
+      ],
+      "channelMessages": [
+        {
+          "id": 1,
+          "author": "user-1",
+          "content": "Hej hopp"
+        },
+        {
+          "id": 2,
+          "author": "user-2",
+          "content": "Hej tillbaka"
+        },
+        {
+          "id": 3,
+          "author": "user-2",
+          "content": "Nytt meddelande i kanal 1"
+        }
       ]
     },
     {
+      "id": 92860,
       "name": "channel 2",
       "password": "pls",
       "members": [
         "user-1",
         "user-2"
       ],
-      "id": 92860
+      "channelMessages": [
+        {
+          "id": 3,
+          "author": "user-1",
+          "content": "Meddelande i kanal 2"
+        }
+      ]
     },
     {
+      "id": 92861,
       "name": "channel 3",
       "password": "pls",
       "members": [
         "user-1",
         "user-2"
       ],
-      "id": 92861
+      "channelMessages": [
+        {
+          "id": 6,
+          "author": "user-1",
+          "content": "YOYO"
+        }
+      ]
     }
   ],
   "messages": [

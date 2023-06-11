@@ -75,8 +75,12 @@ app.post('/login', async (req, res) => {
 	const payload = { userId: user.id, username: user.username};
 	const token = jwt.sign(payload, secret);
 
-	res.send({ token });
-});
+	  // Spara JWT-token i Session Storage
+	  sessionStorage.setItem('token', token);
+
+	  res.send({ token });
+	});
+
 
 
 app.get('/secret', (req, res) => {

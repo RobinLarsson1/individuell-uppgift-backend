@@ -28,7 +28,7 @@ const Login = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	
+
 	const handleLogout = async () => {
 		sessionStorage.removeItem(sessionStorageKey)
 		setIsLoggedIn(false)
@@ -47,8 +47,11 @@ const Login = () => {
 				const data = await response.json();
 				const token = data.token;
 				console.log('Received token:', token);
+				
 
-				sessionStorage.setItem(sessionStorageKey, token);
+				// Spara JWT-token i sessionStorage
+				localStorage.setItem(sessionStorageKey, token);
+
 				setIsLoggedIn(true);
 			} else {
 				console.log('Fel inloggningsuppgifter');
@@ -60,6 +63,7 @@ const Login = () => {
 			console.error(error);
 		}
 	};
+
 
 	useEffect(() => {
 		if (sessionStorage.getItem(sessionStorageKey)) {

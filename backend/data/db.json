@@ -31,9 +31,14 @@
           "content": "Hej hopp"
         },
         {
-          "id": 2,
-          "author": "user-2",
-          "content": "Hej tillbaka"
+          "author": "user-1",
+          "content": "Tjena",
+          "id": 41350
+        },
+        {
+          "author": "user-1",
+          "content": "test",
+          "id": 83321
         }
       ]
     },
@@ -86,11 +91,27 @@
           "author": "user-1",
           "content": "rOBIN",
           "id": 95522
+        }
+      ]
+    },
+    {
+      "id": 92864,
+      "name": "channel 4",
+      "password": "456",
+      "members": [
+        "user-1",
+        "user-2"
+      ],
+      "channelMessages": [
+        {
+          "id": 6,
+          "author": "user-1",
+          "content": "Test11"
         },
         {
           "author": "user-1",
-          "content": "hehe",
-          "id": 15023
+          "content": "nytt meddelande",
+          "id": 53272
         }
       ]
     }

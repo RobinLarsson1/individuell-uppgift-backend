@@ -72,7 +72,7 @@ app.post('/login', async (req, res) => {
 		return;
 	}
 
-	const payload = { userId: user.id };
+	const payload = { userId: user.id, username: user.username };
 	const token = jwt.sign(payload, secret);
 
 	res.send({ token });

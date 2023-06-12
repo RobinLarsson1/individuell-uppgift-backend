@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
 import React from 'react';
+import { useRecoilState } from "recoil"
+import { isLoggedInState } from '../../backend/data/recoil';
 
 // import { getDb } from './data/database.js'
 
 
 
 const Login = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	
-	const localStorageKey = 'jwt-example'
+	const localStorageKey = 'jwt-key'
+
+
 	const handleLogout = async () => {
 		localStorage.removeItem(localStorageKey)
 		setIsLoggedIn(false)

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState } from "recoil"
+import { isLoggedInState } from '../../backend/data/recoil';
 
 function Messages({ channelMessages, channelName, channelId }) {
   const [messages, setMessages] = useState(channelMessages);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [newMessage, setNewMessage] = useState('');
   const [wasEdited, setWasEdited] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
 
 
   //kommer köras varje gång värdet i CM ändras
@@ -18,7 +21,6 @@ function Messages({ channelMessages, channelName, channelId }) {
     if (newMessage.trim() === '') {
       return;
     }
-
 
     const messageData = {
       author: 'user-1',
@@ -64,19 +66,41 @@ function Messages({ channelMessages, channelName, channelId }) {
   };
 
   const updateMessage = async () => {
-
-    //kontrollerar först så att det en medelande är valt och om det är tomt
+    //är valt och inte tomt 
     if (!selectedMessage || newMessage.trim() === '') {
       return;
     }
 
-    //annars så kopierar jag gamla listan med det nya värder
+    //om uppfyllt så skapas en ny lista med det nya meddelandet
     const updatedMessages = messages.map((message) =>
       message.id === selectedMessage.id ? { ...message, content: newMessage } : message
     );
-    setMessages(updatedMessages);
-    setSelectedMessage(null);
-    setNewMessage('');
+//skickas upp till apiet 
+    try {
+      const response = await fetch(
+        //tar id för kanalen samt id för det meddelandet som ska ändras.
+        `http://localhost:3877/api/channels/${channelId}/channelMessages/${selectedMessage.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content: newMessage }),
+        }
+      );
+
+      if (response.ok) {
+        //uppdaterar listan med meddelanden med det nya värdet
+        setMessages(updatedMessages);
+        //tar bort merkering för valt meddelande
+        setSelectedMessage(null);
+        setNewMessage('');
+      } else {
+        console.log('Något gick fel vid uppdatering av meddelandet');
+      }
+    } catch (error) {
+      console.log('Något gick fel', error);
+    }
   };
 
   const deleteMessage = async (messageId) => {
@@ -89,6 +113,7 @@ function Messages({ channelMessages, channelName, channelId }) {
       );
 
       if (response.ok) {
+        //filtrerar ut de id som inte matchar det valda och uppdaterar listan med de andra
         const updatedMessages = messages.filter((message) => message.id !== messageId);
         setMessages(updatedMessages);
         if (selectedMessage && selectedMessage.id === messageId) {
@@ -102,7 +127,7 @@ function Messages({ channelMessages, channelName, channelId }) {
     }
   };
 
-  //tar emot meddelandet som blivit valt och uppdateras newMesssage med värdet från det gamla och gör det redigferingsbart
+  //tar emot meddelandet som blivit valt och uppdateras newMesssage med värdet från det gamla och gör det redigeringsbart
   const handleEditClick = (message) => {
     setSelectedMessage(message);
     setNewMessage(message.content);
@@ -144,7 +169,7 @@ function Messages({ channelMessages, channelName, channelId }) {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
-        <button onClick={handleSubmit}>{selectedMessage ? 'Update' : 'Skicka'}</button>
+        <button onClick={handleSubmit}>{selectedMessage ? 'Update' : 'Send'}</button>
       </section>
     </div>
   );

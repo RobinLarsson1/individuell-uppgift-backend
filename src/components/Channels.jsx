@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { addChannel, deleteChannel, getChannels } from '../../backend/data/channelFetch'
 import Messages from './Messages'
+import { useRecoilState } from "recoil"
+import { isLoggedInState } from '../../backend/data/recoil';
 
 
 
@@ -11,6 +13,7 @@ function Channels() {
   const [selectedChannel, setSelectedChannel] = useState(null);
   const [messages, setMessages] = useState([]); // Ny state-variabel för meddelanden
   const [channelMessages, setChannelMessages] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
   
 
 
@@ -32,26 +35,6 @@ function Channels() {
     }
   };
 
-  const handleDeleteChannel = async (channelId) => {
-    try {
-      await deleteChannel(channelId, setErrorMessage, setChannel);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSubmitChannel = async (event) => {
-    event.preventDefault();
-    try {
-      setChannelName('');
-      const newChannel = { name: channelName, id: Math.random().toString() };
-      await addChannel(channelName, setErrorMessage, getChannels, newChannel);
-      setChannel((prevChannels) => [...prevChannels, newChannel]);
-      console.log('channel added');
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleChannelClick = async (channelId, channelName) => {
     setSelectedChannel(channelId);
@@ -74,12 +57,14 @@ function Channels() {
     }
   };
 
+
+  
   return (
     <div>
       <hr />
       <div className='side-bar'>
         <section className='add-channel-section'>
-          <form action='submit' className='add-channel-form'>
+          {/* <form action='submit' className='add-channel-form'>
             <input
               type='text'
               placeholder='Namn på ny kanal'
@@ -89,7 +74,7 @@ function Channels() {
             <button type='submit' onClick={handleSubmitChannel}>
               Lägg till Kanal
             </button>
-          </form>
+          </form> */}
         </section>
         <section className='show-channel-section'>
           <div>
@@ -98,18 +83,21 @@ function Channels() {
           {channel.map((channel) => (
             <div className='channel' key={channel.id} onClick={() => handleChannelClick(channel.id)}>
               <p onClick={() => setSelectedChannel(channel.id)}> #{channel.name}</p>
-              <button onClick={() => handleDeleteChannel(channel.id)}>Delete Channel</button>
             </div>
           ))}
         </section>
         <br />
       </div>
       {selectedChannel && (
-        <Messages
-        channelMessages={channelMessages}
-        channelName={channelName}
-        channelId={selectedChannel} // Uppdatera här
-      />
+
+    <div>
+          <h2>Aktuell kanal: {channelName}</h2>
+          <Messages
+            channelMessages={channelMessages}
+            channelName={channelName}
+            channelId={selectedChannel}
+          />
+        </div>
       )}
 
     </div>

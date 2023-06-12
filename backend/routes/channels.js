@@ -80,10 +80,66 @@ router.delete('/:id', async (req, res) => {
     res.sendStatus(200);
 })
 
+///DELETE CHANNEL MESSAGE
+router.delete('/:channelId/channelMessages/:messageId', async (req, res) => {
+  const channelId = parseInt(req.params.channelId);
+  const messageId = parseInt(req.params.messageId);
+
+  await db.read();
+  const channelIndex = db.data.channels.findIndex((c) => c.id === channelId);
+  if (channelIndex === -1) {
+    res.status(404).send('Kanalen hittades inte.');
+    return;
+  }
+
+  const channel = db.data.channels[channelIndex];
+  const messageIndex = channel.channelMessages.findIndex(
+    (m) => m.id === messageId
+  );
+  if (messageIndex === -1) {
+    res.status(404).send('Meddelandet hittades inte.');
+    return;
+  }
+
+  channel.channelMessages.splice(messageIndex, 1);
+  await db.write();
+
+  res.sendStatus(200);
+});
 
 
 
-///PUT CHANNELS
+///PUT CHANNELSMESSAGES
+
+router.put('/:channelId/channelMessages/:messageId', async (req, res) => {
+  const channelId = parseInt(req.params.channelId);
+  const messageId = parseInt(req.params.messageId);
+  const updatedMessage = req.body;
+
+
+  ///kollar om kanalen ens finns först, om inte 404
+  await db.read();
+  const channelIndex = db.data.channels.findIndex((c) => c.id === channelId);
+  if (channelIndex === -1) {
+    res.status(404).send('Kanalen hittades inte.');
+    return;
+  }
+
+  //här letar vi efter meddelanden efter id, om inte 404
+  const channel = db.data.channels[channelIndex];
+  const messageIndex = channel.channelMessages.findIndex((m) => m.id === messageId);
+  if (messageIndex === -1) {
+    res.status(404).send('Meddelandet hittades inte.');
+    return;
+  }
+
+
+  //om allt stämmer så kopieras det nmya värdet in i databasen med det nya vädet.
+  channel.channelMessages[messageIndex] = { ...channel.channelMessages[messageIndex], ...updatedMessage };
+  await db.write();
+
+  res.sendStatus(200);
+});
 
 
 export default router

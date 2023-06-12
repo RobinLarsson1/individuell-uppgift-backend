@@ -9,6 +9,11 @@
       "username": "newname",
       "password": "newpassword",
       "id": 63784
+    },
+    {
+      "username": "admin",
+      "password": "pass",
+      "id": 96428
     }
   ],
   "channels": [
@@ -31,14 +36,9 @@
           "content": "Hej tillbaka"
         },
         {
-          "id": 3,
-          "author": "user-2",
-          "content": "Nytt meddelande i kanal 1"
-        },
-        {
           "author": "user-1",
-          "content": "orka",
-          "id": 30721
+          "content": "ggd",
+          "id": 97212
         }
       ]
     },
@@ -60,6 +60,16 @@
           "author": "user-1",
           "content": "BRUH",
           "id": 41907
+        },
+        {
+          "author": "user-1",
+          "content": "brr",
+          "id": 33133
+        },
+        {
+          "author": "user-1",
+          "content": "dddd",
+          "id": 73414
         }
       ]
     },
@@ -81,6 +91,11 @@
           "author": "user-1",
           "content": "rOBIN",
           "id": 95522
+        },
+        {
+          "author": "user-1",
+          "content": "hehe",
+          "id": 15023
         }
       ]
     }

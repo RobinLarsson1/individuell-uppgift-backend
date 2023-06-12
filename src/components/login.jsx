@@ -4,33 +4,15 @@ import React from 'react';
 // import { getDb } from './data/database.js'
 
 
-const sessionStorageKey = 'jwt-example'
-
-// const handleLogin = async () => {
-// 	    // förbereda request: body, options
-// 		// skicka request
-// 		// hantera svaret
-
-// 		let body = { username, password }
-// 		let options = {
-// 			method: 'POST',
-// 			headers: {
-// 				"Content-Type": "application/json"
-// 			},
-// 			body: JSON.stringify(body)
-// 		}
-// }
-
-
-
 
 const Login = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-
+	
+	const localStorageKey = 'jwt-example'
 	const handleLogout = async () => {
-		sessionStorage.removeItem(sessionStorageKey)
+		localStorage.removeItem(localStorageKey)
 		setIsLoggedIn(false)
 	}
 	const handleLogin = async () => {
@@ -49,8 +31,8 @@ const Login = () => {
 				console.log('Received token:', token);
 				
 
-				// Spara JWT-token i sessionStorage
-				localStorage.setItem(sessionStorageKey, token);
+				// Spara JWT-token i localStorage
+				localStorage.setItem(localStorageKey, token);
 
 				setIsLoggedIn(true);
 			} else {
@@ -66,7 +48,7 @@ const Login = () => {
 
 
 	useEffect(() => {
-		if (sessionStorage.getItem(sessionStorageKey)) {
+		if (localStorage.getItem(localStorageKey)) {
 			setIsLoggedIn(true);
 		}
 	}, []);

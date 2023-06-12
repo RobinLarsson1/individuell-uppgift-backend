@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import React from 'react';
 import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
+import { addNewUserState } from '../../backend/data/recoil';
 
 // import { getDb } from './data/database.js'
 
@@ -11,6 +12,7 @@ const Login = () => {
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [showAddUser, setShowAddUser] = useRecoilState(addNewUserState);
 	
 	const localStorageKey = 'jwt-key'
 
@@ -51,6 +53,11 @@ const Login = () => {
 	};
 
 
+	const handleSignUp = () => {
+		setShowAddUser(true);
+	  };
+
+
 	useEffect(() => {
 		if (localStorage.getItem(localStorageKey)) {
 			setIsLoggedIn(true);
@@ -83,6 +90,7 @@ const Login = () => {
 						<button type="button" onClick={handleLogin}>
 							Logga in
 						</button>
+						<button onClick={handleSignUp} >Sign up</button>
 					</>
 				)}
 			</div>

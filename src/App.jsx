@@ -18,9 +18,8 @@ function App() {
     <div>
       <Login setShowAddUser={setShowAddUser} />
         {showAddUser && <AddUser />}
-      <hr />
         <Channels />
-        <br />
+        
         <Users />
       </div>
   )

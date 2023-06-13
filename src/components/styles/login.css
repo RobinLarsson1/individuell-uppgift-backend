@@ -1,0 +1,10 @@
+.chappy-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1em;
+}
+.user-status {
+	display: flex;
+	flex-direction: column;
+}

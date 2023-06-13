@@ -1,0 +1,37 @@
+.channel-div {
+	display: flex;
+}
+
+.channel {
+	width: 12em;
+}
+.channel-name {
+	font-size: 24px;
+	margin: 0.5em;
+	color: #E4E4E4;
+	cursor: pointer;
+}
+.channel-msg {
+	width: 100%;
+	background-color: rgb(228, 228, 228);
+	padding: 2em;
+}
+.channel-msg-text {
+	display: flex;
+	justify-content: flex-start;
+	min-width: 10em;
+	background-color: white;
+	padding: 1em;
+	border-radius: 50px;
+}
+.channel-name-h2 {
+	font-size: 30px;
+}
+.author {
+	margin-right: 0.5em;
+	font-weight: bold;
+}
+.side-bar {
+	background-color: rgb(59, 59, 59);
+	
+}

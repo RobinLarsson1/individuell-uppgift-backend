@@ -1,0 +1,56 @@
+.channel-msg-text {
+	font-size: 20px;
+	margin: 1em;
+}
+.message-content {
+	display: flex;
+	align-items: center;
+	margin: 1em;
+  }
+  
+  .message-icons {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	margin-left: 10px;
+	font-size: 20px;
+	width: 4em;
+  }
+  
+  .message-icons > * {
+	margin-right: 5px;
+  }
+  .input-section {
+	margin-top: 2em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  .message-input {
+	width: 30em;
+	height: 3em;
+	border: none;
+	background-color: white;
+	padding: 0.5em;
+	margin-right: 1em;
+  }
+  .send-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background-color: #E4E4E4;
+  }
+  .send-icon {
+	font-size: 24px;
+	color: #0054FF;
+  }
+  .trash {
+	color: rgb(173, 26, 26);
+  }
+  .user-icon {
+	font-size: 30px;
+  }
+  .author {
+	color: #0054FF;
+  }

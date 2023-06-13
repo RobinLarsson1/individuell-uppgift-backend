@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
+import './styles/message.css'
+import { AiOutlineUser, AiOutlineDelete } from 'react-icons/ai';
+import { VscEdit } from 'react-icons/vsc';
+import { BsSend } from 'react-icons/bs';
 
 function Messages({ channelMessages, channelName, channelId }) {
   const [messages, setMessages] = useState(channelMessages);
@@ -16,14 +20,15 @@ function Messages({ channelMessages, channelName, channelId }) {
   }, [channelMessages]);
 
   const createMessage = async () => {
-    
+
     //hindrar tomma meddelanden
     if (newMessage.trim() === '') {
       return;
     }
 
+    const authorName = isLoggedIn ? isLoggedIn.username : "guest";
     const messageData = {
-      author: isLoggedIn.username,
+      author: authorName,
       content: newMessage,
     };
 
@@ -66,7 +71,7 @@ function Messages({ channelMessages, channelName, channelId }) {
   };
 
 
-  
+
   const updateMessage = async () => {
     //är valt och inte tomt 
     if (!selectedMessage || newMessage.trim() === '') {
@@ -77,7 +82,7 @@ function Messages({ channelMessages, channelName, channelId }) {
     const updatedMessages = messages.map((message) =>
       message.id === selectedMessage.id ? { ...message, content: newMessage } : message
     );
-//skickas upp till apiet 
+    //skickas upp till apiet 
     try {
       const response = await fetch(
         //tar id för kanalen samt id för det meddelandet som ska ändras.
@@ -104,9 +109,6 @@ function Messages({ channelMessages, channelName, channelId }) {
       console.log('Något gick fel', error);
     }
   };
-
-
-
 
   const deleteMessage = async (messageId) => {
     try {
@@ -156,25 +158,31 @@ function Messages({ channelMessages, channelName, channelId }) {
         {messages.length > 0 ? (
           messages.map((message) => (
             <section key={message.id} className={message.author}>
-              <p>
-                {message.author}: {message.content}
-              </p>
-              <button onClick={() => handleEditClick(message)}>Edit</button>
-              <button onClick={() => deleteMessage(message.id)}>Delete</button>
+              <div className="message-content">
+                <AiOutlineUser className="user-icon" />
+                <div className="channel-msg-text">
+                  <p className='author'>{message.author !== 'guest' ? message.author : 'guest'}:</p> <p>{message.content}</p> <p>{message.content}</p>
+                </div>
+                <div className="message-icons">
+                  <VscEdit onClick={() => handleEditClick(message)} className='pen' />
+                  <AiOutlineDelete onClick={() => deleteMessage(message.id)} className='trash' />
+                </div>
+              </div>
             </section>
           ))
         ) : (
           <p>Inga meddelanden</p>
         )}
       </section>
-      <section>
+      <section className='input-section'>
         <input
           type="text"
+          className='message-input'
           placeholder="Ditt meddelande..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
-        <button onClick={handleSubmit}>{selectedMessage ? 'Update' : 'Send'}</button>
+        <button className='send-btn' onClick={handleSubmit}>{selectedMessage ? 'Update' : <BsSend className='send-icon' />}</button>
       </section>
     </div>
   );

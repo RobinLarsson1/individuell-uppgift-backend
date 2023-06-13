@@ -44,6 +44,21 @@
           "author": "admin",
           "content": "Hej",
           "id": 86636
+        },
+        {
+          "author": "admin",
+          "content": "fsafasfas",
+          "id": 89908
+        },
+        {
+          "author": "testuser",
+          "content": "fsafas",
+          "id": 2817
+        },
+        {
+          "author": "guest",
+          "content": "fasfsaf",
+          "id": 39531
         }
       ]
     },
@@ -96,6 +111,11 @@
           "author": "user-1",
           "content": "rOBIN",
           "id": 95522
+        },
+        {
+          "author": "admin",
+          "content": "fsafsa",
+          "id": 89416
         }
       ]
     },
@@ -117,6 +137,16 @@
           "author": "user-1",
           "content": "nytt meddelande",
           "id": 53272
+        },
+        {
+          "author": "admin",
+          "content": "bh",
+          "id": 44975
+        },
+        {
+          "author": "admin",
+          "content": "gsgsdgsdgsgsdggsdgssdggsd",
+          "id": 51054
         }
       ]
     }

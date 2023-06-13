@@ -3,6 +3,7 @@ import { addChannel, deleteChannel, getChannels } from '../../backend/data/chann
 import Messages from './Messages'
 import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
+import './styles/channels.css'
 
 
 
@@ -68,8 +69,7 @@ function Channels() {
 
   
   return (
-    <div>
-      <hr />
+    <div className='channel-div'>
       <div className='side-bar'>
         <section className='show-channel-section'>
           <div>
@@ -77,7 +77,7 @@ function Channels() {
           </div>
           {channel.map((channel) => (
   <div className="channel" key={channel.id} onClick={() => handleChannelClick(channel.id, channel.name)}>
-    <p>
+    <p className='channel-name'>
       #{channel.name}
       {!isLoggedIn && [420, 92860].includes(channel.id)}
       {!isLoggedIn && [92861, 92864].includes(channel.id) && '🔒'}
@@ -90,8 +90,8 @@ function Channels() {
       </div>
       {selectedChannel && (
 
-    <div>
-         <h2>{getChannelName(selectedChannel)}</h2>
+    <div className='channel-msg'>
+         <h2 className='channel-name-h2'>{getChannelName(selectedChannel)}</h2>
           <Messages
             channelMessages={channelMessages}
             channelName={channelName}

@@ -8,6 +8,7 @@
 	justify-content: center; /* Centrerar innehållet både vertikalt och horisontellt */
 	margin: 0 auto; /* Centrerar elementet horisontellt inom förälderelementet */
 	margin-top: 2em; /* Justera önskat mellanrum över elementet */
+	position: absolute;
   }
 
 .add-user-div > input {

@@ -3,6 +3,7 @@ import React from 'react';
 import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
 import { addNewUserState } from '../../backend/data/recoil';
+import './styles/login.css'
 
 // import { getDb } from './data/database.js'
 
@@ -16,11 +17,15 @@ const Login = () => {
 	
 	const localStorageKey = 'jwt-key'
 
+	
 
 	const handleLogout = async () => {
 		localStorage.removeItem(localStorageKey)
 		setIsLoggedIn(false)
 	}
+	
+
+
 	const handleLogin = async () => {
 		try {
 			const response = await fetch('http://localhost:3877/login', {
@@ -57,15 +62,30 @@ const Login = () => {
 		setShowAddUser(true);
 	  };
 
-
-	useEffect(() => {
+	  useEffect(() => {
 		if (localStorage.getItem(localStorageKey)) {
-			setIsLoggedIn(true);
+		  setIsLoggedIn(true);
+		} else {
+		  setIsLoggedIn(false); // Sätt inloggningsstatus till false om det inte finns en JWT-token i localStorage
 		}
-	}, []);
+	  }, []);
+
+
+	  useEffect(() => {
+		const handleBeforeUnload = () => {
+		  localStorage.removeItem(localStorageKey);
+		};
+	
+		window.addEventListener('beforeunload', handleBeforeUnload);
+	
+		return () => {
+		  window.removeEventListener('beforeunload', handleBeforeUnload);
+		};
+	  }, []);
+	
 
 	return (
-		<header>
+		<header className='chappy-header'>
 			<h1>Chappy</h1>
 			<div className="user-status">
 				{isLoggedIn ? (
@@ -96,24 +116,7 @@ const Login = () => {
 			</div>
 		</header>
 
-		//   <section className="login-section">
-		// 	<h2>Logga in</h2>
-		// 	<input
-		// 	  type="text"
-		// 	  placeholder="Användarnamn"
-		// 	  onChange={(e) => setUsername(e.target.value)}
-		// 	  value={username}
-		// 	/>
-		// 	<input
-		// 	  type="password"
-		// 	  placeholder="Lösenord"
-		// 	  onChange={(e) => setPassword(e.target.value)}
-		// 	  value={password}
-		// 	/>
-		// 	<button type="button" onClick={handleLogin}>
-		// 	  Logga in
-		// 	</button>
-		//   </section>
+
 	);
 };
 

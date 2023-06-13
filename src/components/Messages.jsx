@@ -23,7 +23,7 @@ function Messages({ channelMessages, channelName, channelId }) {
     }
 
     const messageData = {
-      author: 'user-1',
+      author: isLoggedIn.username,
       content: newMessage,
     };
 
@@ -65,6 +65,8 @@ function Messages({ channelMessages, channelName, channelId }) {
     }
   };
 
+
+  
   const updateMessage = async () => {
     //är valt och inte tomt 
     if (!selectedMessage || newMessage.trim() === '') {
@@ -102,6 +104,9 @@ function Messages({ channelMessages, channelName, channelId }) {
       console.log('Något gick fel', error);
     }
   };
+
+
+
 
   const deleteMessage = async (messageId) => {
     try {

@@ -22,7 +22,13 @@ function Channels() {
   }, [])
 
 
-
+  const getChannelName = (channelId) => {
+    const selectedChannel = channel.find((channel) => channel.id === channelId);
+    if (selectedChannel) {
+      return selectedChannel.name;
+    }
+    return '';
+  };
   
   const handleGetChannels = async () => {
     try {
@@ -37,6 +43,7 @@ function Channels() {
 
 
   const handleChannelClick = async (channelId, channelName) => {
+    if (isLoggedIn || [420, 92860].includes(channelId)) {
     setSelectedChannel(channelId);
     try {
       const response = await fetch(`/api/channels/${channelId}`);
@@ -55,6 +62,7 @@ function Channels() {
     } catch (error) {
       console.log(error);
     }
+  }
   };
 
 
@@ -63,35 +71,27 @@ function Channels() {
     <div>
       <hr />
       <div className='side-bar'>
-        <section className='add-channel-section'>
-          {/* <form action='submit' className='add-channel-form'>
-            <input
-              type='text'
-              placeholder='Namn på ny kanal'
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-            />
-            <button type='submit' onClick={handleSubmitChannel}>
-              Lägg till Kanal
-            </button>
-          </form> */}
-        </section>
         <section className='show-channel-section'>
           <div>
             <h3>[Kanaler]:</h3>
           </div>
           {channel.map((channel) => (
-            <div className='channel' key={channel.id} onClick={() => handleChannelClick(channel.id)}>
-              <p onClick={() => setSelectedChannel(channel.id)}> #{channel.name}</p>
-            </div>
-          ))}
+  <div className="channel" key={channel.id} onClick={() => handleChannelClick(channel.id, channel.name)}>
+    <p>
+      #{channel.name}
+      {!isLoggedIn && [420, 92860].includes(channel.id)}
+      {!isLoggedIn && [92861, 92864].includes(channel.id) && '🔒'}
+      {isLoggedIn && [92861, 92864].includes(channel.id) && '🔑'}
+    </p>
+  </div>
+))}
         </section>
         <br />
       </div>
       {selectedChannel && (
 
     <div>
-          <h2>Aktuell kanal: {channelName}</h2>
+         <h2>{getChannelName(selectedChannel)}</h2>
           <Messages
             channelMessages={channelMessages}
             channelName={channelName}

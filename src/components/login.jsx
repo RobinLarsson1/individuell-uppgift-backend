@@ -40,7 +40,7 @@ const Login = () => {
 				// Spara JWT-token i localStorage
 				localStorage.setItem(localStorageKey, token);
 
-				setIsLoggedIn(true);
+				setIsLoggedIn({ isLoggedIn: true, username: username });
 			} else {
 				console.log('Fel inloggningsuppgifter');
 				// Återställ användarnamn och lösenord

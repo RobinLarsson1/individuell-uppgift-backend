@@ -126,3 +126,9 @@ nav .unread {
 .align-right {
 	text-align: right;
 }
+a {
+	text-decoration: none;
+}
+li {
+	list-style-type: none;
+}

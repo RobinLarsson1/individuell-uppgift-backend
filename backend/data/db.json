@@ -36,25 +36,20 @@
       ],
       "channelMessages": [
         {
-          "id": 1,
-          "author": "user-1",
-          "content": "Hej hopp"
+          "author": "testuser",
+          "content": "hej",
+          "id": 21815
         },
         {
-          "author": "user-1",
-          "content": "Tjena",
-          "id": 41350
-        },
-        {
-          "author": "user-1",
-          "content": "test",
-          "id": 83321
+          "author": "admin",
+          "content": "Hej",
+          "id": 86636
         }
       ]
     },
     {
       "id": 92860,
-      "name": "channel 2",
+      "name": "Channel 2",
       "password": "pls",
       "members": [
         "user-1",
@@ -85,7 +80,7 @@
     },
     {
       "id": 92861,
-      "name": "channel 3",
+      "name": "Channel 3",
       "password": "pls",
       "members": [
         "user-1",
@@ -106,7 +101,7 @@
     },
     {
       "id": 92864,
-      "name": "channel 4",
+      "name": "Channel 4",
       "password": "456",
       "members": [
         "user-1",

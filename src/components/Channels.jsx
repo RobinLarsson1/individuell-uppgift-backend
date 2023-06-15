@@ -4,6 +4,7 @@ import Messages from './Messages'
 import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
 import './styles/channels.css'
+import Users from './Users'
 
 
 
@@ -56,7 +57,7 @@ function Channels() {
         } else {
           setChannelName(''); // Återställ kanalnamnet till tom sträng om det är odefinierat
         }
-        console.log(data);
+       
       } else {
         throw new Error('Failed to fetch channel messages');
       }
@@ -73,19 +74,20 @@ function Channels() {
       <div className='side-bar'>
         <section className='show-channel-section'>
           <div>
-            <h3>[Kanaler]:</h3>
+            <h3 className='kanaler'>CHANNELS:</h3>
           </div>
           {channel.map((channel) => (
   <div className="channel" key={channel.id} onClick={() => handleChannelClick(channel.id, channel.name)}>
     <p className='channel-name'>
       #{channel.name}
       {!isLoggedIn && [420, 92860].includes(channel.id)}
-      {!isLoggedIn && [92861, 92864].includes(channel.id) && '🔒'}
-      {isLoggedIn && [92861, 92864].includes(channel.id) && '🔑'}
+      {!isLoggedIn && [92861, 92864].includes(channel.id) && ' 🔒'}
+      {isLoggedIn && [92861, 92864].includes(channel.id) && ' 🔑'}
     </p>
   </div>
 ))}
         </section>
+        <Users />
         <br />
       </div>
       {selectedChannel && (

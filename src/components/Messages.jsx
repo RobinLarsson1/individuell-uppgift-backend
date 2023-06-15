@@ -19,6 +19,9 @@ function Messages({ channelMessages, channelName, channelId }) {
     setMessages(channelMessages);
   }, [channelMessages]);
 
+
+
+
   const createMessage = async () => {
 
     //hindrar tomma meddelanden
@@ -34,7 +37,7 @@ function Messages({ channelMessages, channelName, channelId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3877/api/channels/${channelId}/channelMessages`,
+        `/api/channels/${channelId}/channelMessages`,
         {
           method: 'POST',
           headers: {
@@ -86,7 +89,7 @@ function Messages({ channelMessages, channelName, channelId }) {
     try {
       const response = await fetch(
         //tar id för kanalen samt id för det meddelandet som ska ändras.
-        `http://localhost:3877/api/channels/${channelId}/channelMessages/${selectedMessage.id}`,
+        `/api/channels/${channelId}/channelMessages/${selectedMessage.id}`,
         {
           method: 'PUT',
           headers: {
@@ -113,7 +116,7 @@ function Messages({ channelMessages, channelName, channelId }) {
   const deleteMessage = async (messageId) => {
     try {
       const response = await fetch(
-        `http://localhost:3877/api/channels/${channelId}/channelMessages/${messageId}`,
+        `/api/channels/${channelId}/channelMessages/${messageId}`,
         {
           method: 'DELETE',
         }
@@ -161,7 +164,7 @@ function Messages({ channelMessages, channelName, channelId }) {
               <div className="message-content">
                 <AiOutlineUser className="user-icon" />
                 <div className="channel-msg-text">
-                  <p className='author'>{message.author !== 'guest' ? message.author : 'guest'}:</p> <p>{message.content}</p> <p>{message.content}</p>
+                  <p className='author'>{message.author !== 'guest' ? message.author : 'guest'}:</p> <p>{message.content}</p> 
                 </div>
                 <div className="message-icons">
                   <VscEdit onClick={() => handleEditClick(message)} className='pen' />
@@ -178,11 +181,11 @@ function Messages({ channelMessages, channelName, channelId }) {
         <input
           type="text"
           className='message-input'
-          placeholder="Ditt meddelande..."
+          placeholder="Send a message..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
         />
-        <button className='send-btn' onClick={handleSubmit}>{selectedMessage ? 'Update' : <BsSend className='send-icon' />}</button>
+        <button className='send-btn' onClick={handleSubmit}>{selectedMessage ? <VscEdit className='edit-msg' /> : <BsSend className='send-icon' />}</button>
       </section>
     </div>
   );

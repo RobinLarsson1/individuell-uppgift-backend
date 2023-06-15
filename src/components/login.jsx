@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil"
 import { isLoggedInState } from '../../backend/data/recoil';
 import { addNewUserState } from '../../backend/data/recoil';
 import './styles/login.css'
+import logo from '../img/logo-no-background.png';
 
 // import { getDb } from './data/database.js'
 
@@ -86,31 +87,37 @@ const Login = () => {
 
 	return (
 		<header className='chappy-header'>
-			<h1>Chappy</h1>
+			<img src={logo} alt="Chappy logo" className='chappy-logo' />
 			<div className="user-status">
 				{isLoggedIn ? (
 					<>
-						<span>Inloggad som {username}</span>
-						<button onClick={handleLogout}>Logga ut</button>
+						<span className='logged-in-as'>Inloggad som <b className='u-name'>{username} </b></span>
+						<button onClick={handleLogout} className='log-out'>Logga ut</button>
 					</>
 				) : (
 					<>
+					<div className='login-input'>
 						<input
 							type="text"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 							placeholder="användarnamn"
+							className='login-field'
 						/>
 						<input
 							type="password"
 							value={password}
 							placeholder="password"
 							onChange={(e) => setPassword(e.target.value)}
+							className='login-field'
 						/>
+						</div>
+						<div className='login-btns'>
 						<button type="button" onClick={handleLogin}>
 							Logga in
 						</button>
 						<button onClick={handleSignUp} >Sign up</button>
+						</div>
 					</>
 				)}
 			</div>

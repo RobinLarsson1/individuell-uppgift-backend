@@ -43,7 +43,7 @@ const AddUser = () => {
 		<button className="close-btn" onClick={handleClose}>
             X
           </button>
-		<h3>Add new user</h3>
+		<h3 className="add-new-user">Add new user</h3>
 		<input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
 		<input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 		<button className="add-user-btn" onClick={handleAddUser}> Submit </button>

@@ -17,10 +17,8 @@ function App() {
   return (
     <div>
       <Login setShowAddUser={setShowAddUser} />
-        {showAddUser && <AddUser />}
         <Channels />
-        
-        <Users />
+
       </div>
   )
 }

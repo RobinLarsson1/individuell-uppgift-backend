@@ -2,28 +2,28 @@
   "users": [
     {
       "id": 1,
-      "username": "testuser",
-      "password": "123"
+      "username": "Kalle",
+      "password": "kalle"
     },
     {
-      "username": "newname",
-      "password": "newpassword",
+      "username": "Johan",
+      "password": "johan",
       "id": 63784
     },
     {
-      "username": "admin",
-      "password": "pass",
+      "username": "Admin",
+      "password": "admin",
       "id": 96428
     },
     {
-      "username": "userfromol",
-      "password": "test",
-      "id": 21092
+      "username": "Emma",
+      "password": "emma",
+      "id": 96176
     },
     {
-      "username": "hehe",
-      "password": "123",
-      "id": 95132
+      "username": "Anna",
+      "password": "anna",
+      "id": 34916
     }
   ],
   "channels": [
@@ -36,29 +36,24 @@
       ],
       "channelMessages": [
         {
-          "author": "testuser",
-          "content": "hej",
-          "id": 21815
+          "author": "Anna",
+          "content": "Hallå",
+          "id": 10286
         },
         {
-          "author": "admin",
-          "content": "Hej",
-          "id": 86636
+          "author": "Kalle",
+          "content": "Hej!",
+          "id": 24566
         },
         {
-          "author": "admin",
-          "content": "fsafasfas",
-          "id": 89908
+          "author": "Johan",
+          "content": "Tjenare",
+          "id": 63217
         },
         {
-          "author": "testuser",
-          "content": "fsafas",
-          "id": 2817
-        },
-        {
-          "author": "guest",
-          "content": "fasfsaf",
-          "id": 39531
+          "author": "Emma",
+          "content": "Hejhej!",
+          "id": 4412
         }
       ]
     },
@@ -72,24 +67,24 @@
       ],
       "channelMessages": [
         {
-          "id": 3,
-          "author": "user-1",
-          "content": "Meddelande i kanal 2"
+          "author": "Anna",
+          "content": "Hejsan",
+          "id": 96237
         },
         {
-          "author": "user-1",
-          "content": "BRUH",
-          "id": 41907
+          "author": "Kalle",
+          "content": "Tjena!",
+          "id": 45880
         },
         {
-          "author": "user-1",
-          "content": "brr",
-          "id": 33133
+          "author": "Emma",
+          "content": "Tja!",
+          "id": 78475
         },
         {
-          "author": "user-1",
-          "content": "dddd",
-          "id": 73414
+          "author": "Johan",
+          "content": "Tjenare!",
+          "id": 38756
         }
       ]
     },
@@ -103,19 +98,24 @@
       ],
       "channelMessages": [
         {
-          "id": 6,
-          "author": "user-1",
-          "content": "YOYO"
+          "author": "Anna",
+          "content": "God dag!",
+          "id": 8956
         },
         {
-          "author": "user-1",
-          "content": "rOBIN",
-          "id": 95522
+          "author": "Kalle",
+          "content": "Hallå!",
+          "id": 26705
         },
         {
-          "author": "admin",
-          "content": "fsafsa",
-          "id": 89416
+          "author": "Emma",
+          "content": "Halloj",
+          "id": 58344
+        },
+        {
+          "author": "Johan",
+          "content": "Tja!",
+          "id": 35424
         }
       ]
     },
@@ -129,24 +129,24 @@
       ],
       "channelMessages": [
         {
-          "id": 6,
-          "author": "user-1",
-          "content": "Test11"
+          "author": "Anna",
+          "content": "Tjenare!",
+          "id": 4184
         },
         {
-          "author": "user-1",
-          "content": "nytt meddelande",
-          "id": 53272
+          "author": "Kalle",
+          "content": "Hej! :)",
+          "id": 53030
         },
         {
-          "author": "admin",
-          "content": "bh",
-          "id": 44975
+          "author": "Emma",
+          "content": "Hej!",
+          "id": 71852
         },
         {
-          "author": "admin",
-          "content": "gsgsdgsdgsgsdggsdgssdggsd",
-          "id": 51054
+          "author": "Johan",
+          "content": "Tjenare",
+          "id": 61447
         }
       ]
     }

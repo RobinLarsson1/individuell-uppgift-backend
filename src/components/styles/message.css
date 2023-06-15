@@ -1,5 +1,5 @@
 .channel-msg-text {
-	font-size: 20px;
+	font-size: 18px;
 	margin: 1em;
 }
 .message-content {
@@ -19,6 +19,7 @@
   
   .message-icons > * {
 	margin-right: 5px;
+	cursor: pointer;
   }
   .input-section {
 	margin-top: 2em;
@@ -31,26 +32,37 @@
 	height: 3em;
 	border: none;
 	background-color: white;
-	padding: 0.5em;
+	padding: 1em;
 	margin-right: 1em;
+	border-radius: 50px;
   }
   .send-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: none;
+	padding: 0.5em;
 	background-color: #E4E4E4;
   }
-  .send-icon {
+  .send-icon, .edit-msg {
 	font-size: 24px;
 	color: #0054FF;
+	cursor: pointer;
   }
   .trash {
-	color: rgb(173, 26, 26);
+	color: #ff003c;
   }
   .user-icon {
 	font-size: 30px;
   }
   .author {
 	color: #0054FF;
+  }
+
+  .message.own-message {
+	text-align: right;
+  }
+  
+  .message.other-message {
+	text-align: left;
   }

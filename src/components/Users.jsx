@@ -1,73 +1,94 @@
-import { useEffect, useState } from "react"
-import { getUsers, deleteUser, addUser } from "../../backend/data/userFetch"
-import './styles/users.css'
+import React, { useEffect, useState } from "react";
+import { getUsers, addUser } from "../../backend/data/userFetch";
+import AddUser from "./AddUser";
+import "./styles/users.css";
+import { isLoggedInState } from '../../backend/data/recoil';
+import { useRecoilState } from "recoil";
+import { AiOutlineDelete } from 'react-icons/ai';
 
 function Users() {
-  const [errorMessage, setErrorMessage] = useState('')
-  const [user, setUser] = useState([])
-  const [userName, setUserName] = useState('')
-  const [userPassword, setUserPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState("");
+  const [users, setUsers] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
 
+
+
+  
   useEffect(() => {
-    handleGetUsers()
-  }, [])
+    handleGetUsers();
+  }, []);
 
 
   const handleGetUsers = async () => {
     try {
-      const data = await getUsers()
-      setUser(data)
-      setErrorMessage('')
+      const data = await getUsers();
+      setUsers(data);
+      setErrorMessage("");
     } catch (error) {
-      setErrorMessage(error.message)
-      console.log('Fel vid hämtning av users');
+      setErrorMessage(error.message);
+      console.log("Fel vid hämtning av users");
     }
-  }
+  };
+
+
 
   const handleDeleteUser = async (userId) => {
+    setErrorMessage("");
     try {
-      await deleteUser(userId, setErrorMessage, setUser);
+      const response = await fetch(`/api/users/${userId}`, { method: 'DELETE' });
+      if (response.status === 200) {
+        // user successfully deleted
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+      } else if (response.status === 400) {
+        // Invalid ID
+        const errorText = await response.text();
+        setErrorMessage(errorText);
+      } else if (response.status === 404) {
+        // user not found
+        const errorText = await response.text();
+        setErrorMessage(errorText);
+      } else {
+        // Other error occurred
+        throw new Error('An error occurred while deleting the user');
+      }
     } catch (error) {
-      console.log(error);
+      // Handle network or fetch error
+      setErrorMessage(error.message);
+      console.log('Error in removing user');
     }
   };
 
 
-  const handleSubmitUser = async (event) => {
-    event.preventDefault();
-    try {
-      setUserName('');
-      setUserPassword('')
-      const newUser = { name: userName, password: userPassword, id: Math.random().toString() };
-      await addUser(userName, userPassword, setErrorMessage, getChannels, newUser);
-      setUser((prevUsers) => [...prevUsers, newUser]);
-      console.log('user added');
-    } catch (error) {
-      console.log(error);
-    }
+
+  const handleAddUser = (newUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser]);
   };
+
+
 
 
   return (
     <div>
-      <div>
-        <section className='add-user-section'>
-          <form action="submit" className='add-user-form'>
-          </form>
-        </section>
-        <section className='show-user-section'>
-          <div><h3>[DM]:</h3></div>
-          {user.map(user => (
-            <div className='user' key={user.id}>
-              <p> {user.username}</p>
-            </div>
-          ))}
-        </section>
-      </div>
+      <AddUser handleAddUser={handleAddUser} />
+      {isLoggedIn && (
+        <div>
+          <div>
+            <section className="add-user-section">
+            </section>
+            <section className="show-user-section">
+              <h3 className="user-h3">USERS:</h3>
+              {users.map((user) => (
+                <div className="user" key={user.id}>
+                  <p className=""> {user.username}</p>
+                  <AiOutlineDelete onClick={() => handleDeleteUser(user.id)}  className="delete-user"/>
+                </div>
+              ))}
+            </section>
+          </div>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Users
-
-
+export default Users;

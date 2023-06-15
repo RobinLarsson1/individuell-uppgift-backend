@@ -8,3 +8,43 @@
 	display: flex;
 	flex-direction: column;
 }
+.logged-in-as {
+	color: white;
+	margin-bottom: 0.5em;
+}
+.u-name {
+	color: #ff003c;
+}
+.chappy-logo {
+	height: 4em;
+}
+.login-input {
+	display: flex;
+	flex-direction: column;
+}
+.login-field {
+	height: 2em;
+	border: none;
+	margin-bottom: 0.5em;
+	padding-left: 0.5em;
+}
+.login-btns {
+	display: flex;
+	justify-content: space-between;
+}
+.login-btns > button {
+	padding: 0.5em 1em;
+	background-color: #ff003c;
+	border: none;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+.log-out {
+	padding: 0.5em 1em;
+	background-color: #ff003c;
+	border: none;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}

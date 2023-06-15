@@ -25,8 +25,7 @@ const db = getDb()
 app.use(cors())
 app.use(express.json());  // gör så att vi kan använda req.body
 app.use((req, res, next) => {
-	console.log(`${req.method} ${req.url}`, req.body);
-	console.log(req.headers.authorization);
+	
 	next();
 });
 
@@ -83,7 +82,7 @@ app.post('/login', async (req, res) => {
 app.get('/secret', (req, res) => {
 	let authHeader = req.headers.Authorization
 	// let jwt = authHeader.replace('Bearer:', '')
-	console.log('Secret 1:', authHeader) 
+	
 
 	res.send('Fail')
 })

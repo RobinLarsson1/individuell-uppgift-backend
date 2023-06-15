@@ -30,6 +30,7 @@ router.get('/:id', async (req, res) => {
   });
   
 
+  
 ///LÄGG TILL CHANNEL
 router.post('/', async (req, res) => {
     let addChannel = req.body
@@ -40,6 +41,8 @@ router.post('/', async (req, res) => {
     await db.write()
     res.send({ id: addChannel.id })
 })
+
+
 
 // LÄGG TILL MEDDELANDE
 router.post('/:channelId/channelMessages', async (req, res) => {
@@ -59,6 +62,8 @@ router.post('/:channelId/channelMessages', async (req, res) => {
     
     res.send({ id: newMessage.id });
   });
+
+
 
 ///DELETE CHANNEL 
 router.delete('/:id', async (req, res) => {

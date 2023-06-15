@@ -1,6 +1,3 @@
-
-
-
 const getUsers = async () => {
     try {
         const response = await fetch('/api/users');
@@ -11,31 +8,6 @@ const getUsers = async () => {
     }
 };
 
-const deleteUser = async (userId, setErrorMessage, setUser) => {
-    setErrorMessage('');
-    try {
-        const response = await fetch(`/api/users/${userId}`, { method: 'DELETE' });
-        if (response.status === 200) {
-            // user successfully deleted
-            setUser((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-        } else if (response.status === 400) {
-            // Invalid ID
-            const errorText = await response.text();
-            setErrorMessage(errorText);
-        } else if (response.status === 404) {
-            // user not found
-            const errorText = await response.text();
-            setErrorMessage(errorText);
-        } else {
-            // Other error occurred
-            throw new Error('An error occurred while deleting the user');
-        }
-    } catch (error) {
-        // Handle network or fetch error
-        setErrorMessage(error.message);
-        console.log('Error in removing user');
-    }
-};
 
 const addUser = async (userName, userPassword, setErrorMessage, getUsers, setUser) => {
     setErrorMessage('');
@@ -73,4 +45,4 @@ const addUser = async (userName, userPassword, setErrorMessage, getUsers, setUse
     }
 };
 
-export { getUsers, deleteUser, addUser }
+export { getUsers, addUser }

@@ -30,10 +30,6 @@
     {
       "id": 420,
       "name": "Channel 1",
-      "members": [
-        "user-1",
-        "user-2"
-      ],
       "channelMessages": [
         {
           "author": "Anna",
@@ -54,17 +50,17 @@
           "author": "Emma",
           "content": "Hejhej!",
           "id": 4412
+        },
+        {
+          "author": "Emma",
+          "content": "fsafas",
+          "id": 22440
         }
       ]
     },
     {
       "id": 92860,
       "name": "Channel 2",
-      "password": "pls",
-      "members": [
-        "user-1",
-        "user-2"
-      ],
       "channelMessages": [
         {
           "author": "Anna",
@@ -85,17 +81,17 @@
           "author": "Johan",
           "content": "Tjenare!",
           "id": 38756
+        },
+        {
+          "author": "Emma",
+          "content": "fsafs",
+          "id": 18641
         }
       ]
     },
     {
       "id": 92861,
       "name": "Channel 3",
-      "password": "pls",
-      "members": [
-        "user-1",
-        "user-2"
-      ],
       "channelMessages": [
         {
           "author": "Anna",
@@ -122,11 +118,6 @@
     {
       "id": 92864,
       "name": "Channel 4",
-      "password": "456",
-      "members": [
-        "user-1",
-        "user-2"
-      ],
       "channelMessages": [
         {
           "author": "Anna",
@@ -149,28 +140,6 @@
           "id": 61447
         }
       ]
-    }
-  ],
-  "messages": [
-    {
-      "id": 18,
-      "author": "user-1",
-      "content": "Hej hopp"
-    },
-    {
-      "id": 19,
-      "author": "user-1",
-      "content": "agasaga"
-    },
-    {
-      "id": 20,
-      "author": "user-1",
-      "content": "fsafasf"
-    },
-    {
-      "author": "test",
-      "content": "nytt meddelande",
-      "id": 707476
     }
   ]
 }

@@ -177,6 +177,7 @@ function Messages({ channelMessages, channelName, channelId }) {
           <p>Inga meddelanden</p>
         )}
       </section>
+      <hr className='input-section-hr' />
       <section className='input-section'>
         <input
           type="text"

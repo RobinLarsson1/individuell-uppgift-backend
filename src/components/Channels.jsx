@@ -24,6 +24,14 @@ function Channels() {
   }, [])
 
 
+  useEffect(() => {
+    return () => {
+      setSelectedChannel(null); // Återställ selectedChannel när komponenten avmonteras
+      setChannelMessages([]); // Rensa channelMessages när komponenten avmonteras
+    };
+  }, []);
+
+
   const getChannelName = (channelId) => {
     const selectedChannel = channel.find((channel) => channel.id === channelId);
     if (selectedChannel) {

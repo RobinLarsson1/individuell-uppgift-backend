@@ -1,56 +1,59 @@
-import { useRecoilState } from "recoil"
-import { useState } from "react"
-import { addNewUserState } from "../../backend/data/recoil"
-import './styles/addUser.css'
+import { useRecoilState } from "recoil";
+import { useState } from "react";
+import { addNewUserState } from "../../backend/data/recoil";
+import './styles/addUser.css';
 
 const AddUser = () => {
-	const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-	const [showForm, setShowForm] = useRecoilState(addNewUserState)
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showForm, setShowForm] = useRecoilState(addNewUserState);
 
+  const handleAddUser = async () => {
+    if (username && password) {
+      try {
+        const response = await fetch(`/api/users`, {
+          method: 'POST',
+          body: JSON.stringify({
+            username: username,
+            password: password
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
 
-	const handleAddUser = async () => {
-        try {
-          const response = await fetch(`/api/users`, {
-            method: 'POST',
-            body: JSON.stringify({
-              username: username,
-              password: password
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-    
-        } catch (error) {
-          console.log('Could not post message: ' + error.message)
-        }
-        setShowForm(false)
-        setUsername('')
-        setPassword('')
+      } catch (error) {
+        console.log('Could not post message: ' + error.message);
       }
+      setShowForm(false);
+      setUsername('');
+      setPassword('');
+    }
+  }
 
+  const handleClose = () => {
+    setShowForm(false);
+    setUsername('');
+    setPassword('');
+  };
 
-	  const handleClose = () => {
-		setShowForm(false);
-		setUsername('');
-		setPassword('');
-	  };
+  const isSubmitDisabled = !(username && password);
 
-	return (
-		<>
-		{showForm && <div className="add-user-div" >
-		<button className="close-btn" onClick={handleClose}>
+  return (
+    <>
+      {showForm && (
+        <div className="add-user-div">
+          <button className="close-btn" onClick={handleClose}>
             X
           </button>
-		<h3 className="add-new-user">Add new user</h3>
-		<input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-		<input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-		<button className="add-user-btn" onClick={handleAddUser}> Submit </button>
-		</div> }
-		</>
-	)
+          <h3 className="add-new-user">Add new user</h3>
+          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button className="add-user-btn" onClick={handleAddUser} disabled={isSubmitDisabled}> Submit </button>
+        </div>
+      )}
+    </>
+  );
 }
 
-
-export default AddUser
+export default AddUser;

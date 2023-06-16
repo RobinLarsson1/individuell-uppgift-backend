@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react';
 import { useRecoilState } from "recoil"
-import { isLoggedInState } from '../../backend/data/recoil';
+import { isLoggedInState, selectChannelState } from '../../backend/data/recoil';
 import { addNewUserState } from '../../backend/data/recoil';
 import './styles/login.css'
 import logo from '../img/logo-no-background.png';
@@ -15,6 +15,7 @@ const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [showAddUser, setShowAddUser] = useRecoilState(addNewUserState);
+	const [selectedChannel, setSelectedChannel] = useRecoilState(selectChannelState);
 	
 	const localStorageKey = 'jwt-key'
 
@@ -23,6 +24,7 @@ const Login = () => {
 	const handleLogout = async () => {
 		localStorage.removeItem(localStorageKey)
 		setIsLoggedIn(false)
+		setSelectedChannel(null); // Reset the selectedChannel state variable to null
 	}
 	
 

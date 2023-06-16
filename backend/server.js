@@ -4,14 +4,12 @@ import express from 'express'
 import usersRouter from './routes/users.js'
 import channelsRouter from './routes/channels.js'
 import messagesRouter from './routes/messages.js'
-// import loginRouter from './routes/login.js'
-// import secretRouter from './routes/secret.js'
 import cors from 'cors'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import jwt from 'jsonwebtoken';
 import { getDb } from './data/database.js'
-import authenticateToken from './data/authenticateToken.js'
+
 
 
 const { sign } = jwt;

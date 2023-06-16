@@ -123,7 +123,7 @@ function Messages({ channelMessages, channelName, channelId }) {
       );
 
       if (response.ok) {
-        //filtrerar ut de id som inte matchar det valda och uppdaterar listan med de andra
+        
         const updatedMessages = messages.filter((message) => message.id !== messageId);
         setMessages(updatedMessages);
         if (selectedMessage && selectedMessage.id === messageId) {

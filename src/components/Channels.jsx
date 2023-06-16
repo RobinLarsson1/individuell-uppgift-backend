@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { addChannel, deleteChannel, getChannels } from '../../backend/data/channelFetch'
 import Messages from './Messages'
 import { useRecoilState } from "recoil"
-import { isLoggedInState } from '../../backend/data/recoil';
+import { isLoggedInState, selectChannelState } from '../../backend/data/recoil';
 import './styles/channels.css'
 import Users from './Users'
 
@@ -12,7 +12,7 @@ function Channels() {
   const [channelName, setChannelName] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [channel, setChannel] = useState([])
-  const [selectedChannel, setSelectedChannel] = useState(null);
+  const [selectedChannel, setSelectedChannel] = useRecoilState(selectChannelState);
   const [messages, setMessages] = useState([]); // Ny state-variabel för meddelanden
   const [channelMessages, setChannelMessages] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)

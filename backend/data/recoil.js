@@ -10,3 +10,7 @@ export const addNewUserState = atom({
 	default: false
 })
 
+export const selectChannelState = atom({
+	key: 'selectChannelState',
+	default: null
+})

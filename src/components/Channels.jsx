@@ -1,36 +1,33 @@
-import { useState, useEffect } from 'react'
-import { addChannel, deleteChannel, getChannels } from '../../backend/data/channelFetch'
-import Messages from './Messages'
-import { useRecoilState } from "recoil"
+import { useState, useEffect } from 'react';
+import { addChannel, deleteChannel, getChannels } from '../../backend/data/channelFetch';
+import Messages from './Messages';
+import { useRecoilState } from 'recoil';
+import './styles/channels.css';
+import Users from './Users';
 import { isLoggedInState, selectChannelState } from '../../backend/data/recoil';
-import './styles/channels.css'
-import Users from './Users'
 
 
+const localStorageKey = 'jwt-key';
 
 function Channels() {
-  const [channelName, setChannelName] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [channel, setChannel] = useState([])
+  const [channelName, setChannelName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [channel, setChannel] = useState([]);
   const [selectedChannel, setSelectedChannel] = useRecoilState(selectChannelState);
-  const [messages, setMessages] = useState([]); // Ny state-variabel för meddelanden
   const [channelMessages, setChannelMessages] = useState([]);
+  const [lockedMessage, setLockedMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
-  
-
 
   useEffect(() => {
-    handleGetChannels()
-  }, [])
-
+    handleGetChannels();
+  }, []);
 
   useEffect(() => {
     return () => {
-      setSelectedChannel(null); // Återställ selectedChannel när komponenten avmonteras
-      setChannelMessages([]); // Rensa channelMessages när komponenten avmonteras
+      setSelectedChannel(null);
+      setChannelMessages([]);
     };
   }, []);
-
 
   const getChannelName = (channelId) => {
     const selectedChannel = channel.find((channel) => channel.id === channelId);
@@ -39,7 +36,7 @@ function Channels() {
     }
     return '';
   };
-  
+
   const handleGetChannels = async () => {
     try {
       const data = await getChannels();
@@ -51,32 +48,44 @@ function Channels() {
     }
   };
 
-
   const handleChannelClick = async (channelId, channelName) => {
-    if (isLoggedIn || [420, 92860].includes(channelId)) {
     setSelectedChannel(channelId);
     try {
-      const response = await fetch(`/api/channels/${channelId}`);
+      const token = localStorage.getItem(localStorageKey);
+      const headers = {
+        'Content-Type': 'application/json'
+      };
+
+      // Kontrollera om kanalen är låst och om en giltig JWT-token finns
+      const selectedChannel = channel.find((channel) => channel.id === channelId);
+      if (selectedChannel.locked === 'true' && !token) {
+        setLockedMessage('Kanalen är låst. Du måste logga in för att visa meddelanden.');
+        return;
+      }
+
+      // Om en giltig JWT-token finns, lägg till token i begäran
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`/api/channels/${channelId}`, { headers });
       if (response.ok) {
         const data = await response.json();
         setChannelMessages(data);
         if (channelName) {
-          setChannelName(channelName); // Sätt kanalnamnet om det är definierat
+          setChannelName(channelName);
         } else {
-          setChannelName(''); // Återställ kanalnamnet till tom sträng om det är odefinierat
+          setChannelName('');
         }
-       
+        setLockedMessage('');
       } else {
         throw new Error('Failed to fetch channel messages');
       }
     } catch (error) {
       console.log(error);
     }
-  }
   };
 
-
-  
   return (
     <div className='channel-div'>
       <div className='side-bar'>
@@ -85,12 +94,14 @@ function Channels() {
             <h3 className='kanaler'>CHANNELS:</h3>
           </div>
           {channel.map((channel) => (
-  <div className="channel" key={channel.id} onClick={() => handleChannelClick(channel.id, channel.name)}>
+  <div
+    className="channel"
+    key={channel.id}
+    onClick={() => handleChannelClick(channel.id, channel.name)}
+  >
     <p className='channel-name'>
-      #{channel.name}
-      {!isLoggedIn && [420, 92860].includes(channel.id)}
-      {!isLoggedIn && [92861, 92864].includes(channel.id) && ' 🔒'}
-      {isLoggedIn && [92861, 92864].includes(channel.id) && ' 🔑'}
+    #{channel.name} {channel.locked === 'true' && !isLoggedIn ? '🔒' : null}
+
     </p>
   </div>
 ))}
@@ -99,22 +110,19 @@ function Channels() {
         <br />
       </div>
       {selectedChannel && (
-
-    <div className='channel-msg'>
-         <h2 className='channel-name-h2'>{getChannelName(selectedChannel)}</h2>
-          <Messages
-            channelMessages={channelMessages}
-            channelName={channelName}
-            channelId={selectedChannel}
-          />
+        <div className='channel-msg'>
+          {lockedMessage ? (
+            <h2>{lockedMessage}</h2>
+          ) : (
+            <>
+              <h2 className='channel-name-h2'>{getChannelName(selectedChannel)}</h2>
+              <Messages channelMessages={channelMessages} channelName={channelName} channelId={selectedChannel} />
+            </>
+          )}
         </div>
       )}
-
     </div>
   );
 }
 
-
-export default Channels
-
-
+export default Channels;

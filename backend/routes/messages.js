@@ -38,6 +38,7 @@ router.post('/', async (req, res) => {
 	db.data.messages.push(addMessage)
 	await db.write()
 	res.send({ id: addMessage.id })
+	console.log('hata livet')
 })
 
 

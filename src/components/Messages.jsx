@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from "recoil"
-import { isLoggedInState } from '../../backend/data/recoil';
+import { addNewUserState, isLoggedInState } from '../../backend/data/recoil';
 import './styles/message.css'
 import { AiOutlineUser, AiOutlineDelete } from 'react-icons/ai';
 import { VscEdit } from 'react-icons/vsc';
 import { BsSend } from 'react-icons/bs';
+
+
 
 function Messages({ channelMessages, channelName, channelId }) {
   const [messages, setMessages] = useState(channelMessages);
@@ -12,6 +14,7 @@ function Messages({ channelMessages, channelName, channelId }) {
   const [newMessage, setNewMessage] = useState('');
   const [wasEdited, setWasEdited] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState)
+  const [loggedInUser, setLoggedInUser] = useRecoilState(addNewUserState);
 
 
   //kommer köras varje gång värdet i CM ändras
@@ -23,36 +26,33 @@ function Messages({ channelMessages, channelName, channelId }) {
 
 
   const createMessage = async () => {
-
-    //hindrar tomma meddelanden
+    // Hindrar tomma meddelanden
     if (newMessage.trim() === '') {
       return;
     }
-
-    const authorName = isLoggedIn ? isLoggedIn.username : "guest";
+  
+    // Bestäm författarnamn baserat på om användaren är inloggad eller inte
+    const authorName = isLoggedIn ? loggedInUser.username : 'guest';
+  
     const messageData = {
       author: authorName,
       content: newMessage,
     };
-
+  
     try {
-      const response = await fetch(
-        `/api/channels/${channelId}/channelMessages`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(messageData),
-        }
-      );
-
+      const response = await fetch(`/api/channels/${channelId}/channelMessages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(messageData),
+      });
+  
       if (response.ok) {
         const data = await response.json();
         const newMessageId = data.id;
-
-
-        //här skapar jag ny array med de gamla meddelanden + det nya och skickar tillbaka det
+  
+        // Skapar en ny array med de gamla meddelandena plus det nya och uppdaterar state
         const updatedChannelMessages = [
           ...messages,
           {
@@ -61,8 +61,7 @@ function Messages({ channelMessages, channelName, channelId }) {
             content: messageData.content,
           },
         ];
-
-        //uppdateras messages med det nya
+  
         setMessages(updatedChannelMessages);
         setNewMessage('');
       } else {
@@ -72,6 +71,7 @@ function Messages({ channelMessages, channelName, channelId }) {
       console.log('Något gick fel', error);
     }
   };
+  
 
 
 

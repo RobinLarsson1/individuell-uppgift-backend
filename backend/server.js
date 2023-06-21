@@ -68,21 +68,45 @@ app.post('/login', async (req, res) => {
 		res.sendStatus(401);
 		return;
 	}
-
+	const hour = 60 * 60
 	const payload = { userId: user.id, username: user.username };
-	const token = jwt.sign(payload, secret);
-
-	res.send({ token });
+	const options = { expiresIn: 2 * hour }
+	let token = jwt.sign(payload, secret, options);
+	console.log('signed JWT: ', token)
+	let tokenPackage = { token: token }
+	res.send(tokenPackage);
 });
 
 
 
+/// GET /secret
 app.get('/secret', (req, res) => {
-	let authHeader = req.headers.Authorization
-	// let jwt = authHeader.replace('Bearer:', '')
-	
+	let authHeader = req.headers.authorization
+	// console.log('Secret 1: ', authHeader)
+	if( !authHeader ) {
+		res.status(401).send({
+			message: 'You must be authenticated to view this very secret data.'
+		})
+		return
+	}
+	let token = authHeader.replace('Bearer: ', '')
 
-	res.send('Fail')
+	try {
+		let decoded = jwt.verify(token, secret)
+		console.log('GET /secret decoded: ', decoded)
+		let userId = decoded.userId
+		let user = user.find(u => u.id === userId)
+		console.log(`User "${user.username}" has access to secret data.`)
+		// Vi kan hämta info om användaren med hjälp av userId
+		
+		res.send({
+			message: 'This is secret data. Because you are authenticated.'
+		})
+
+	} catch(error) {
+		console.log('GET /secret error: ' + error.message)
+		res.sendStatus(401)
+	}
 })
 
 

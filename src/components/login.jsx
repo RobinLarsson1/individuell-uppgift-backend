@@ -69,9 +69,9 @@ const Login = () => {
 		if (localStorage.getItem(localStorageKey)) {
 		  setIsLoggedIn(true);
 		} else {
-		  setIsLoggedIn(false); // Sätt inloggningsstatus till false om det inte finns en JWT-token i localStorage
+		  setIsLoggedIn(false);
 		}
-	  }, []);
+	  }, [isLoggedIn]);
 
 
 	  useEffect(() => {

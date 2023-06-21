@@ -1,15 +1,15 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 
-
+const localStorageKey = 'jwt-key';
 const router = express.Router()
 const db = getDb() 
 
-///GET 
 router.get('/', async (req, res) => {
 	await db.read()
 	res.send(db.data.channels)
 })
+
 
 ///GET FRÅN ID
 router.get('/:id', async (req, res) => {

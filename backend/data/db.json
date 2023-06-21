@@ -30,6 +30,7 @@
     {
       "id": 420,
       "name": "Channel 1",
+      "locked": "false",
       "channelMessages": [
         {
           "author": "Anna",
@@ -50,17 +51,13 @@
           "author": "Emma",
           "content": "Hejhej!",
           "id": 4412
-        },
-        {
-          "author": "Emma",
-          "content": "fsafas",
-          "id": 22440
         }
       ]
     },
     {
       "id": 92860,
       "name": "Channel 2",
+      "locked": "false",
       "channelMessages": [
         {
           "author": "Anna",
@@ -86,12 +83,28 @@
           "author": "Emma",
           "content": "fsafs",
           "id": 18641
+        },
+        {
+          "author": "guest",
+          "content": "fsaf",
+          "id": 31356
+        },
+        {
+          "author": "guest",
+          "content": "fasf",
+          "id": 94862
+        },
+        {
+          "author": "guest",
+          "content": "fsafa",
+          "id": 75434
         }
       ]
     },
     {
       "id": 92861,
       "name": "Channel 3",
+      "locked": "true",
       "channelMessages": [
         {
           "author": "Anna",
@@ -112,12 +125,17 @@
           "author": "Johan",
           "content": "Tja!",
           "id": 35424
+        },
+        {
+          "content": "fsaf",
+          "id": 41235
         }
       ]
     },
     {
       "id": 92864,
       "name": "Channel 4",
+      "locked": "true",
       "channelMessages": [
         {
           "author": "Anna",
@@ -138,8 +156,9 @@
           "author": "Johan",
           "content": "Tjenare",
           "id": 61447
-        }
-      ]
-    }
-  ]
-}
+        },
+        {
+          "content": "fsaf",
+          "id": 16622
+jenare",
+          "id": 61447

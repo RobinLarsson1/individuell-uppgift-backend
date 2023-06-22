@@ -14,3 +14,12 @@ export const selectChannelState = atom({
 	key: 'selectChannelState',
 	default: null
 })
+
+export const authorState = atom({
+	key: 'authorState',
+	default: {
+	  isLoggedIn: false,
+	  username: '',
+	  authToken: ''
+	},
+  });

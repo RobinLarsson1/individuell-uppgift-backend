@@ -1,6 +1,8 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 
+
+
 const localStorageKey = 'jwt-key';
 const router = express.Router()
 const db = getDb() 
@@ -69,6 +71,12 @@ router.delete('/:id', async (req, res) => {
 router.post('/:channelId/channelMessages', async (req, res) => {
   const channelId = parseInt(req.params.channelId);
   const newMessage = req.body;
+  
+  // Lägg till författarnamnet i det nya meddelandet
+  const authorName = req.user.username; // Antag att författarnamnet finns i req.user.username
+
+  newMessage.id = Math.floor(Math.random() * 100000);
+  newMessage.author = authorName;
 
   await db.read();
   const channelIndex = db.data.channels.findIndex((c) => c.id === channelId);
@@ -77,10 +85,9 @@ router.post('/:channelId/channelMessages', async (req, res) => {
     return;
   }
 
-  newMessage.id = Math.floor(Math.random() * 100000);
   db.data.channels[channelIndex].channelMessages.push(newMessage);
   await db.write();
-  
+
   res.send({ id: newMessage.id });
 });
 

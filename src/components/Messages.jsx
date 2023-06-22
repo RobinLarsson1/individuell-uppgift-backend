@@ -61,7 +61,7 @@ function Messages({ channelMessages, channelName, channelId }) {
             content: messageData.content,
           },
         ];
-  
+        
         setMessages(updatedChannelMessages);
         setNewMessage('');
       } else {

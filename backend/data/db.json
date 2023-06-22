@@ -24,6 +24,11 @@
       "username": "Anna",
       "password": "anna",
       "id": 34916
+    },
+    {
+      "username": "1",
+      "password": "1",
+      "id": 47347
     }
   ],
   "channels": [
@@ -43,14 +48,19 @@
           "id": 24566
         },
         {
-          "author": "Johan",
-          "content": "Tjenare",
-          "id": 63217
+          "author": "guest",
+          "content": "fsafs",
+          "id": 67191
         },
         {
-          "author": "Emma",
-          "content": "Hejhej!",
-          "id": 4412
+          "author": "Admin",
+          "content": "fasfas",
+          "id": 73308
+        },
+        {
+          "author": "Admin",
+          "content": "fasfas",
+          "id": 77237
         }
       ]
     },
@@ -80,24 +90,17 @@
           "id": 38756
         },
         {
-          "author": "Emma",
-          "content": "fsafs",
-          "id": 18641
-        },
-        {
           "author": "guest",
           "content": "fsaf",
-          "id": 31356
+          "id": 92386
         },
         {
-          "author": "guest",
-          "content": "fasf",
-          "id": 94862
+          "content": "gsgsd",
+          "id": 33385
         },
         {
-          "author": "guest",
-          "content": "fsafa",
-          "id": 75434
+          "content": "fasfas",
+          "id": 50932
         }
       ]
     },
@@ -122,13 +125,12 @@
           "id": 58344
         },
         {
-          "author": "Johan",
-          "content": "Tja!",
-          "id": 35424
+          "content": "GSDGSD",
+          "id": 73376
         },
         {
-          "content": "fsaf",
-          "id": 41235
+          "content": "GSDGSD",
+          "id": 36069
         }
       ]
     },
@@ -153,12 +155,10 @@
           "id": 71852
         },
         {
-          "author": "Johan",
-          "content": "Tjenare",
-          "id": 61447
-        },
-        {
-          "content": "fsaf",
-          "id": 16622
-jenare",
-          "id": 61447
+          "content": "hEJ",
+          "id": 29004
+        }
+      ]
+    }
+  ]
+}

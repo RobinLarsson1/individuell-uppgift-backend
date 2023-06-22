@@ -1,6 +1,8 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 
+
+
 const router = express.Router()
 const db = getDb()
 
@@ -38,6 +40,7 @@ router.post('/', async (req, res) => {
 	db.data.messages.push(addMessage)
 	await db.write()
 	res.send({ id: addMessage.id })
+	console.log('hata livet')
 })
 
 

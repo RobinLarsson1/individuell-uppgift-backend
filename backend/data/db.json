@@ -19,16 +19,6 @@
       "username": "Emma",
       "password": "emma",
       "id": 96176
-    },
-    {
-      "username": "Anna",
-      "password": "anna",
-      "id": 34916
-    },
-    {
-      "username": "1",
-      "password": "1",
-      "id": 47347
     }
   ],
   "channels": [
@@ -48,19 +38,19 @@
           "id": 24566
         },
         {
-          "author": "guest",
-          "content": "fsafs",
-          "id": 67191
+          "author": "Admin",
+          "content": "fasfa",
+          "id": 63152
+        },
+        {
+          "author": "Emma",
+          "content": "fasfs",
+          "id": 99876
         },
         {
           "author": "Admin",
-          "content": "fasfas",
-          "id": 73308
-        },
-        {
-          "author": "Admin",
-          "content": "fasfas",
-          "id": 77237
+          "content": "Tjabba",
+          "id": 9134
         }
       ]
     },
@@ -95,12 +85,9 @@
           "id": 92386
         },
         {
-          "content": "gsgsd",
-          "id": 33385
-        },
-        {
-          "content": "fasfas",
-          "id": 50932
+          "author": "Emma",
+          "content": "fsaaf",
+          "id": 51841
         }
       ]
     },
@@ -125,12 +112,9 @@
           "id": 58344
         },
         {
-          "content": "GSDGSD",
-          "id": 73376
-        },
-        {
-          "content": "GSDGSD",
-          "id": 36069
+          "author": "Admin",
+          "content": "Hallå där!",
+          "id": 83820
         }
       ]
     },
@@ -155,8 +139,9 @@
           "id": 71852
         },
         {
-          "content": "hEJ",
-          "id": 29004
+          "author": "Admin",
+          "content": "Tjenare!",
+          "id": 9998
         }
       ]
     }
